@@ -1,0 +1,16 @@
+{
+  "name": "exercise-2",
+  "version": "1.0.0",
+  "description": "Exercise 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "cobsccomp191p-009",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  }
+}
