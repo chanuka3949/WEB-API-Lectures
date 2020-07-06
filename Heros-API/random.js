@@ -10,8 +10,18 @@ function getMovieFromDb() {
     });
 }
 
+//Using Async Await
+async function printMovieDetails() {
+    let movieDataFromDB = await getMovieFromDb();
+    let secondFucntion = await getAnotherAction();
+    console.log("3: Movie Data:");
+    console.log(result.name);
+}
+
+//Using Resolve Promise
 getMovieFromDb().then((result) => {
-    console.log("3: Movie Data: " + result.name);
+    console.log("3: Movie Data:");
+    console.log(result.name);
 });
 
 console.log("4: Doing some other work");
