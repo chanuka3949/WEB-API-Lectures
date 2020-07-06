@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('./middleware/logger');
 
 const app = express();
 const PORT = 3000;
@@ -16,15 +17,10 @@ const subjectList = [
     {id: 3, name: "Chemistry"},
     {id: 4, name: "ICT"}
 ]
-const requestLog = [];
 
 //Middleware
 app.use(express.json());
-app.use((req, res, next) => {
-    requestLog.push("Method: " + req.method + "|" + "Timestamp: " + new Date());
-    //console.log(requestLog);
-    next();
-});
+app.use(logger);
 
 //Endpoints
 //Student
@@ -50,7 +46,7 @@ app.post('/api/students', (req, res) => {
         name: req.body.studentName
     }
     studentList.push(student);
-    res.send(student);
+    res.send(studentList);
 });
 
 app.put('/api/students/:studentId', (req, res) => {
@@ -100,7 +96,7 @@ app.post('/api/subjects', (req, res) => {
         name: req.body.subjectName
     }
     subjectList.push(subject);
-    res.send(subject);
+    res.send(subjectList);
 });
 
 app.put('/api/subjects/:subjectId', (req, res) => {
