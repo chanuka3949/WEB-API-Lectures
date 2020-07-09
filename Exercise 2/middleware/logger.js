@@ -1,6 +1,7 @@
 var logger = (req, res, next) => {
-    requestLog.push("Method: " + req.method + "|" + "Timestamp: " + new Date());
-    console.log(requestLog);
+    let logMessage = "Method: " + req.method + "|" + "Timestamp: " + new Date();
+    requestLog.push(logMessage);
+    console.log(logMessage);
     next();
 }
 
