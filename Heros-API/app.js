@@ -13,7 +13,7 @@ app.use(express.json()); //Catch json data in the request body
 //Middleware
 app.use(authenticator);
 app.use(email);
-app.use('/api/hero', herosRoutes);
+app.use('/api/heros', herosRoutes);
 app.use('/', homeRoutes);
 
 mongoose
