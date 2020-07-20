@@ -46,6 +46,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:heroId', async (req, res) => {
+    //this is update first method. There is another method called query first method where we find the objevt first and then update it with two steps
     try {
         if (!req.body.likeCount) {
             return res.status(400).send("Not all mandetory values have been set");
