@@ -2,21 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Hero = require('../models/hero');
 
-const herosArray = [
-    {
-        id: 1,
-        name: 'Bat Man'
-    },
-    {
-        id: 2,
-        name: 'Super Man'
-    },
-    {
-        id: 3,
-        name: 'Spider Man'
-    }
-]
-
 router.get('/', async (req, res) => {
     try {
         let heros = await Hero.find();
@@ -62,10 +47,10 @@ router.post('/', async (req, res) => {
 
 router.put('/:heroId', async (req, res) => {
     try {
-        if (!req.body.heroName) {
+        if (!req.body.likeCount) {
             return res.status(400).send("Not all mandetory values have been set");
         }
-        let hero = await Hero.findByIdAndUpdate(req.params.heroId, { name: req.body.heroName })
+        let hero = await Hero.findByIdAndUpdate(req.params.heroId, {$set: { name: req.body.likeCount }}, {useFindAndModify: false})
         if (!hero) {
             return res.status(404).send("Hero Id does not exit");
         }
