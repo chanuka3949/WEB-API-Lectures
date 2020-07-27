@@ -1,16 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const herosRoutes = require('./routes/heros');
+const cors = require('cors')
 const homeRoutes = require('./routes/home');
 const authenticator = require('./middleware/authentication');
 const email = require('./middleware/email');
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 
 app.use(express.json()); //Catch json data in the request body
 
 //Middleware
+app.use(cors());
 app.use(authenticator);
 app.use(email);
 app.use('/api/heros', herosRoutes);
