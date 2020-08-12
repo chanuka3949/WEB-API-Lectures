@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Hero from "./Hero";
+import axios from "axios";
 
 class Heros extends Component {
   state = {
-    allAvengers: []
+    allAvengers: [],
   };
   render() {
     return (
       <div className="container">
         <div className="row">
           {this.state.allAvengers.map((avenger) => (
-            <div key={avenger.id} className="col">
-              <Hero likeCount={avenger.likeCount} />
+            <div className="col" key={avenger._id}>
+              <Hero avenger={avenger} />
             </div>
           ))}
         </div>
@@ -21,16 +21,17 @@ class Heros extends Component {
   }
   async componentDidMount() {
     let { data } = await axios.get("http://localhost:5000/api/heros");
-    console.log(data);
 
-    let avengers = data.map((avenger) => {
-      return {
-        id: avenger._id,
-        imgUrl: avenger.imgUrl,
-        name: avenger.name,
-      };
-    });
-    this.setState({ allAvengers: avengers });
+    // let avengers = data.map((avenger) => {
+    //   return {
+    //     id: avenger._id,
+    //     likeCount: avenger.likeCount,
+    //     imageUrl: avenger.imageUrl,
+    //     birthName: avenger.birthName,
+    //     movies: avenger.movies,
+    //   };
+    // });
+    this.setState({ allAvengers: data });
   }
 }
 
