@@ -7,11 +7,15 @@ class Hero extends Component {
   render() {
     return (
       <div className="card" style={{ width: "18rem" }}>
-        <img src={this.props.avenger.imageUrl} className="card-img-top" />
+        <img
+          src={this.props.avenger.imageUrl}
+          className="card-img-top"
+          alt={this.props.avenger.birthName}
+        />
         <div className="card-body">
           <h5 className="card-title">Avengers Name</h5>
           <h6>Avenger Birth Name</h6>
-          <ul className="card-text">{this.showMoviews()}</ul>
+          <ul className="card-text">{this.showMovies()}</ul>
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -19,8 +23,11 @@ class Hero extends Component {
             }}
           >
             Like{" "}
-            <span className="badge badge-light">{this.props.avenger.likeCount}</span>
+            <span className="badge badge-light">
+              {this.props.avenger.likeCount}
+            </span>
           </button>
+          <button onClick={this.props.onDelete} className="btn btn-danger">Delete</button>
         </div>
       </div>
     );
@@ -30,8 +37,9 @@ class Hero extends Component {
     //else return "Is an avenger";
     return this.props._id < 0 ? "Not an avenger" : "Is an avenger";
   }
-  showMoviews() {
-    if (this.props.avenger.movies.length === 0) return <p>No movies available</p>;
+  showMovies() {
+    if (this.props.avenger.movies.length === 0)
+      return <p>No movies available</p>;
     return this.props.avenger.movies.map((movie) => (
       <li key={this.props.avenger.movies.indexOf(movie)}>{movie}</li>
     ));

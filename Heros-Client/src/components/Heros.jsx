@@ -12,12 +12,17 @@ class Heros extends Component {
         <div className="row">
           {this.state.allAvengers.map((avenger) => (
             <div className="col" key={avenger._id}>
-              <Hero avenger={avenger} />
+              <Hero avenger={avenger} onDelete={ () => this.deleteAvenger} />
             </div>
           ))}
         </div>
       </div>
     );
+  }
+
+  async deleteAvenger(avengerId) {
+    await axios.delete(`http://localhost:5000/api/heros/${avengerId}`);
+    this.state.allAvengers.filter(avenger => avenger.id !== avengerId)
   }
   async componentDidMount() {
     let { data } = await axios.get("http://localhost:5000/api/heros");
