@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     try{
         jwt.verify(token, SECRET_KEY);
     } catch(e) {
-        res.status(400).send({message:"Invalid token"})
+        return res.status(400).send({message:"Invalid token"})
     }
     if (!req.body.heroName) {
         return res.status(400).send("Error of hero name ");
@@ -73,16 +73,16 @@ router.put('/:heroId', async (req, res) => {
 });
 
 router.delete('/:heroId', async (req, res) => {
-    const token = req.header("x-jwt-token");
-    if(!token) return res.status(401).send({message: "Access denied. No token"});
-    try{
-        jwt.verify(token, SECRET_KEY);
-    } catch(e) {
-        res.status(400).send({message:"Invalid token"})
-    }
-    let decoded = jwt.decode(token, SECRET_KEY)
-    if(!decoded.isAdmin)
-        return res.status(403).send({message: "Forbbiden: No authorization to delete"})
+    // const token = req.header("x-jwt-token");
+    // if(!token) return res.status(401).send({message: "Access denied. No token"});
+    // try{
+    //     jwt.verify(token, SECRET_KEY);
+    // } catch(e) {
+    //     return res.status(400).send({message:"Invalid token"})
+    // }
+    // let decoded = jwt.decode(token, SECRET_KEY)
+    // if(!decoded.isAdmin)
+    //     return res.status(403).send({message: "Forbbiden: No authorization to delete"})
     try {
         let hero = await Hero.findByIdAndDelete(req.params.heroId);
         if (!hero) {
